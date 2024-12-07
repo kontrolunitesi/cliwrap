@@ -51,7 +51,12 @@ detect_history_file() {
 # Function to clean the history file for processing
 preprocess_history() {
     local file="$1"
-    cat "$file" | LC_ALL=C tr -cd '\11\12\15\40-\176' # Allow printable ASCII characters only
+    if [ -f "$file" ]; then
+        cat "$file" | LC_ALL=C tr -cd '\11\12\15\40-\176' # Allow printable ASCII characters only
+    else
+        echo "Error: No history file found" >&2
+        exit 1
+    fi
 }
 
 # Parse history and count occurrences

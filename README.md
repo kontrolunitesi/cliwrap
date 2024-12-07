@@ -1,7 +1,7 @@
 # CLIwrap
 🎉 The *"Spotify Wrapped"* feature for **your** terminal!
 
-### How?
+### How?
 CLIwrap uses your **`.zsh_history`** or **`.bash_history`** file to serve you a recap of what commands you ran in your terminal!
 
 ### Installation

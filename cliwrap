@@ -116,6 +116,7 @@ EOF
 display_table() {
     local title="$1"
     local data="$2"
+    local suppress_message="$3"
 
     echo -e "\n${MAGENTA}${title}${RESET}"
     echo -e "${YELLOW}---------------------------------${RESET}"
@@ -123,6 +124,33 @@ display_table() {
     echo -e "${YELLOW}---------------------------------${RESET}"
     echo -e "$data"
     echo -e "${YELLOW}---------------------------------${RESET}\n"
+
+    if [[ "$suppress_message" != "true" ]]; then
+        # Extract the most used command/tool
+        local top_item
+        top_item=$(echo "$data" | head -n 1 | awk '{print $2}')
+
+        # Custom messages for specific commands/tools
+        if [[ "$top_item" == "git" ]]; then
+            echo -e "${YELLOW}Great! You're a git master! Keep version controlling like a pro.${RESET}"
+        elif [[ "$top_item" == "ls" ]]; then
+            echo -e "${YELLOW}Looks like you're exploring a lot of directories. Neat!${RESET}"
+        elif [[ "$top_item" == "cd" ]]; then
+            echo -e "${YELLOW}Navigating through the filesystem like a champ!${RESET}"
+        elif [[ "$top_item" == "python" ]]; then
+            echo -e "${YELLOW}Python enthusiast detected! Keep coding.${RESET}"
+        elif [[ "$top_item" == "vim" || "$top_item" == "nano" ]]; then
+            echo -e "${YELLOW}Spending quality time editing files, I see!${RESET}"
+        elif [[ "$top_item" == "apt" || "$top_item" == "brew" || "$top_item" == "pacman" || "$top_item" == "yay" ]]; then
+            echo -e "${YELLOW}You like download new packages and apps, am I correct?${RESET}"
+        elif [[ "$top_item" == "cliwrap" || "$top_item" == "./cliwrap" ]]; then
+            echo -e "${YELLOW}Your top tool is CLIwrap? Thank you for the interest!${RESET}" 
+        elif [[ "$top_item" == "code" ]]; then
+            echo -e "${YELLOW}VSCode? Do you really program that much?${RESET}"
+        else
+            echo -e "${YELLOW}Your top tool is '$top_item'. Keep rocking your terminal!${RESET}"
+        fi
+    fi
 }
 
 # Display help message
@@ -168,12 +196,12 @@ main() {
     # Top tools
     local top_tools
     top_tools=$(parse_history "$history_data")
-    display_table "Top Tools" "$top_tools"
+    display_table "Top Tools" "$top_tools" "true"
 
     # Top full commands
     local top_commands
     top_commands=$(parse_full_commands "$history_data")
-    display_table "Top Full Commands" "$top_commands"
+    display_table "Top Full Commands" "$top_commands" "false"
 
     # Total commands
     if [[ "$history_file" == *"fish_history" ]]; then

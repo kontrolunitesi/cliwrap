@@ -1,5 +1,5 @@
-#!/bin/bash
-#!/bin/zsh
+#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 # This file is protected under the MIT License.
 # Please see the LICENSE and the README file for more information.

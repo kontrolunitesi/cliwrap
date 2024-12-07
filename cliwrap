@@ -105,7 +105,7 @@ display_help() {
     echo -e "${YELLOW}Options:${RESET}"
     echo -e "${GREEN}  -zsh${RESET}    Force Zsh history file"
     echo -e "${GREEN}  -bash${RESET}   Force Bash history file"
-    echo -e "${GREEN}  -csh${RESET}   Force Csh history file"
+    echo -e "${GREEN}  -csh${RESET}    Force Csh history file"
     echo -e "${GREEN}  -tcsh${RESET}   Force Tcsh history file"
     echo -e "${GREEN}  -h${RESET}      Display this help message"
     echo -e "${YELLOW}Description:${RESET}"

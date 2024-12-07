@@ -2,7 +2,12 @@
 🎉 The *"Spotify Wrapped"* feature for **your** terminal!
 
 ### How?
-CLIwrap uses your **`.zsh_history`** or **`.bash_history`** file to serve you a recap of what commands you ran in your terminal!
+CLIwrap reads your shell's history file to serve you a recap of what commands you ran in your terminal!
+
+### Supported Shells
+- bash
+- zsh
+- csh/tcsh
 
 ### Installation
 Installing **CLIwrap** is easy! You can pull this Git image, or create a new file and set everything up yourself. Because that it is a simple **bash** script, you don't need to run or build anything!

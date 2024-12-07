@@ -18,7 +18,14 @@ RESET='\033[0m'
 
 # Function to detect the history file based on the flag
 detect_history_file() {
-    if [[ "$1" == "-zsh" ]]; then
+    if [[ "$1" == "-fish" ]]; then
+        if [[ -f "$HOME/.local/share/fish/fish_history" ]]; then
+            echo "$HOME/.local/share/fish/fish_history"
+        else
+            echo -e "${RED}The specified terminal history file was not found! Why don't you run \`cliwrap -h\` to find a compatible one?${RESET}" >&2
+            return 1
+        fi
+    elif [[ "$1" == "-zsh" ]]; then
         if [[ -f "$HOME/.zsh_history" ]]; then
             echo "$HOME/.zsh_history"
         else
@@ -40,7 +47,9 @@ detect_history_file() {
             return 1
         fi
     else
-        if [[ -f "$HOME/.zsh_history" ]]; then
+        if ([[ -f "$HOME/.local/share/fish/fish_history" ]]); then
+            echo "$HOME/.local/share/fish/fish_history"
+        elif [[ -f "$HOME/.zsh_history" ]]; then
             echo "$HOME/.zsh_history"
         elif [[ -f "$HOME/.bash_history" ]]; then
             echo "$HOME/.bash_history"
@@ -57,7 +66,11 @@ detect_history_file() {
 preprocess_history() {
     local file="$1"
     if [ -f "$file" ]; then
-        cat "$file" | LC_ALL=C tr -cd '\11\12\15\40-\176' # Allow printable ASCII characters only
+        if [[ "$file" == *"fish_history" ]]; then
+            awk '/- cmd: /{cmd=substr($0,8); print cmd}' "$file"
+        else
+            cat "$file" | LC_ALL=C tr -cd '\11\12\15\40-\176' # Allow printable ASCII characters only
+        fi
     else
         echo "Error: No history file found" >&2
         return 1
@@ -67,12 +80,20 @@ preprocess_history() {
 # Parse history and count occurrences
 parse_history() {
     local history_data="$1"
-    echo "$history_data" | awk '{print $1}' | grep -v '^$' | sort | uniq -c | sort -rn | head -10
+    if [[ "$history_file" == *"fish_history" ]]; then
+        echo "$history_data" | awk '{print $1}' | sort | uniq -c | sort -rn | head -10
+    else
+        echo "$history_data" | awk '{print $1}' | grep -v '^$' | sort | uniq -c | sort -rn | head -10
+    fi
 }
 
 parse_full_commands() {
     local history_data="$1"
-    echo "$history_data" | grep -E '^\s*\S+\s+\S+' | sort | uniq -c | sort -rn | head -10
+    if [[ "$history_file" == *"fish_history" ]]; then
+        echo "$history_data" | sort | uniq -c | sort -rn | head -10
+    else
+        echo "$history_data" | grep -E '^\s*\S+\s+\S+' | sort | uniq -c | sort -rn | head -10
+    fi
 }
 
 # Display the cool title :P
@@ -112,11 +133,12 @@ display_help() {
     echo -e "${GREEN}  -bash${RESET}   Force Bash history file"
     echo -e "${GREEN}  -csh${RESET}    Force Csh history file"
     echo -e "${GREEN}  -tcsh${RESET}   Force Tcsh history file"
+    echo -e "${GREEN}  -fish${RESET}   Force Fish shell history file"
     echo -e "${GREEN}  -h${RESET}      Display this help message"
     echo -e "${YELLOW}Description:${RESET}"
-    echo -e "Use Bash, Zsh, Csh or Tcsh history file to create \"Spotify Wrapped-like\" statistics for your terminal usage."
-    echo -e "${YELLOW}Donations:${RESET}"
-    echo -e "You can support me over Github! @islemci"
+    echo -e "Use your terminal's history file to make Sporif Wrapped-like statistics on your terminal usage."
+    echo -e "${YELLOW}Source Code:${RESET}"
+    echo -e "https://github.com/islemci/cliwrap"
 }
 
 # Main logic
@@ -154,9 +176,15 @@ main() {
     display_table "Top Full Commands" "$top_commands"
 
     # Total commands
-    local total_commands
-    total_commands=$(echo "$history_data" | wc -l)
-    echo -e "${GREEN}Total Commands Executed: ${total_commands}${RESET}"
+    if [[ "$history_file" == *"fish_history" ]]; then
+        local total_commands
+        total_commands=$(grep -c '^- cmd: ' "$history_file")
+        echo -e "${GREEN}Total Commands Executed: ${total_commands}${RESET}"
+    else
+        local total_commands
+        total_commands=$(echo "$history_data" | wc -l)
+        echo -e "${GREEN}Total Commands Executed: ${total_commands}${RESET}"
+    fi
 }
 
 main "$@"

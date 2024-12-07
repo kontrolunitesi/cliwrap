@@ -136,7 +136,7 @@ display_help() {
     echo -e "${GREEN}  -fish${RESET}   Force Fish shell history file"
     echo -e "${GREEN}  -h${RESET}      Display this help message"
     echo -e "${YELLOW}Description:${RESET}"
-    echo -e "Use your terminal's history file to make Sporif Wrapped-like statistics on your terminal usage."
+    echo -e "Use your terminal's history file to make Spotify Wrapped-like statistics on your terminal usage."
     echo -e "${YELLOW}Source Code:${RESET}"
     echo -e "https://github.com/islemci/cliwrap"
 }

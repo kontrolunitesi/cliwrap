@@ -13,40 +13,35 @@ CLIwrap reads your shell's history file to serve you a recap of what commands yo
 Installing **CLIwrap** is easy! You can pull this Git image, or create a new file and set everything up yourself. Because that it is a simple **bash** script, you don't need to run or build anything!
 
 #### Run from file
-First of all, create a new file named `cliwrap`:
+With commands below, download cliwrap to your current directory and mark it as executable.
 
 ```bash
-$ touch cliwrap
-```
-
-Copy the content of the [`cliwrap`](CLIWRAP) file to your new file. After that, make sure that you have enabled execution permissons for this file:
-
-```bash
-$ sudo chmod +x /usr/local/bin/cliwrap
+$ curl -sSL -o cliwrap https://raw.githubusercontent.com/islemci/cliwrap/refs/heads/main/cliwrap
+$ chmod +x cliwrap
 ```
 
 Now, try running it with by running the following command:
 
 ```bash
-./cliwrap
+$ ./cliwrap
 ```
 
 Congrats! Now the script should be working. You can run it with the `-h` flag for more information.
 
-#### Run from `/usr/local/bin`
+#### Run from everywhere
 
-To run it everywhere with a simple command, you can move the script into your `/usr/local/bin` directory.
+To run it everywhere with a simple command, you can use command below to download the script and move the script into your `/usr/local/bin` directory.
 
-After following the instructions from the `Run from file` header, run:
 
 ```bash
-sudo mv cliwrap /usr/local/bin/
+$ sudo curl -sSL -o /usr/local/bin/cliwrap https://raw.githubusercontent.com/islemci/cliwrap/refs/heads/main/cliwrap
+$ sudo chmod +x /usr/local/bin/cliwrap
 ```
 
-This will move the script to your executables directory. Now, you can run:
+Now, you can run:
 
 ```bash
-cliwrap
+$ cliwrap
 ```
 
 to get your wrapped everywhere!

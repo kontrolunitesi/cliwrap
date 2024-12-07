@@ -8,6 +8,7 @@ CLIwrap reads your shell's history file to serve you a recap of what commands yo
 - bash
 - zsh
 - csh/tcsh
+- fish
 
 ### Installation
 Installing **CLIwrap** is easy! You can pull this Git image, or create a new file and set everything up yourself. Because that it is a simple **bash** script, you don't need to run or build anything!

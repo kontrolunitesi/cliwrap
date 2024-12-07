@@ -12,6 +12,17 @@ CLIwrap reads your shell's history file to serve you a recap of what commands yo
 ### Installation
 Installing **CLIwrap** is easy! You can pull this Git image, or create a new file and set everything up yourself. Because that it is a simple **bash** script, you don't need to run or build anything!
 
+#### Install via Homebrew
+You can now easily install **CLIwrap** on your device with [Homebrew](https://brew.sh)
+```bash
+$ brew tap islemci/cliwrap
+$ brew install cliwrap
+```
+
+> [!NOTE]
+> As the **CLIwrap** is not currently in the Homebrew main repo, you should not forget to add the tap of this app via `brew tap`.
+
+
 #### Run from file
 With commands below, download cliwrap to your current directory and mark it as executable.
 

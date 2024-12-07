@@ -60,8 +60,7 @@ to get your wrapped everywhere!
 
 ### Custom messages for specific commands/tools
 
-There are now special messages for tools and commands. For example, for `.ls`, "Looks like you're exploring a lot of directories. Neat!". 
- 
+Motivating and positive messages about usage of tools like `ls`, `brew` etc. will be displayed if one of them is a top tool.
 
 ### License
 This project is licensed under the MIT License. You can check out the conditions [here.](LICENSE)

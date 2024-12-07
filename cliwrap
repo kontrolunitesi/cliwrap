@@ -27,11 +27,20 @@ detect_history_file() {
             echo "Error: Bash history file not found at $HOME/.bash_history" >&2
             exit 1
         fi
+    elif [[ "$1" == "-csh" ]] || [[ "$1" == "-tcsh" ]]; then
+        if [[ -f "$HOME/.history" ]]; then
+            echo "$HOME/.history"
+        else
+            echo "Error: Csh/Tcsh history file not found at $HOME/.history" >&2
+            exit 1
+        fi
     else
         if [[ -f "$HOME/.zsh_history" ]]; then
             echo "$HOME/.zsh_history"
         elif [[ -f "$HOME/.bash_history" ]]; then
             echo "$HOME/.bash_history"
+        elif [[ -f "$HOME/.history" ]]; then
+            echo "$HOME/.history"
         else
             echo "Error: No history file found" >&2
             exit 1
@@ -42,7 +51,12 @@ detect_history_file() {
 # Function to clean the history file for processing
 preprocess_history() {
     local file="$1"
-    cat "$file" | LC_ALL=C tr -cd '\11\12\15\40-\176' # Allow printable ASCII characters only
+    if [ -f "$file" ]; then
+        cat "$file" | LC_ALL=C tr -cd '\11\12\15\40-\176' # Allow printable ASCII characters only
+    else
+        echo "Error: No history file found" >&2
+        exit 1
+    fi
 }
 
 # Parse history and count occurrences
@@ -91,9 +105,11 @@ display_help() {
     echo -e "${YELLOW}Options:${RESET}"
     echo -e "${GREEN}  -zsh${RESET}    Force Zsh history file"
     echo -e "${GREEN}  -bash${RESET}   Force Bash history file"
+    echo -e "${GREEN}  -csh${RESET}    Force Csh history file"
+    echo -e "${GREEN}  -tcsh${RESET}   Force Tcsh history file"
     echo -e "${GREEN}  -h${RESET}      Display this help message"
     echo -e "${YELLOW}Description:${RESET}"
-    echo -e "Use Bash or Zsh history file to create \"Spotify Wrapped-like\" statistics for your terminal usage."
+    echo -e "Use Bash, Zsh, Csh or Tcsh history file to create \"Spotify Wrapped-like\" statistics for your terminal usage."
     echo -e "${YELLOW}Donations:${RESET}"
     echo -e "You can support me over Github! @islemci"
 }

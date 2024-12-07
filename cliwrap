@@ -123,6 +123,31 @@ display_table() {
     echo -e "${YELLOW}---------------------------------${RESET}"
     echo -e "$data"
     echo -e "${YELLOW}---------------------------------${RESET}\n"
+
+    # Extract the most used command/tool
+    local top_item
+    top_item=$(echo "$data" | head -n 1 | awk '{print $2}')
+
+    # Custom messages for specific commands/tools
+    if [[ "$top_item" == "git" ]]; then
+        echo -e "${GREEN}Wow! You're a git master! Keep version controlling like a pro.${RESET}"
+    elif [[ "$top_item" == "ls" ]]; then
+        echo -e "${GREEN}Looks like you're exploring a lot of directories. Neat!${RESET}"
+    elif [[ "$top_item" == "cd" ]]; then
+        echo -e "${GREEN}Navigating through the filesystem like a champ!${RESET}"
+    elif [[ "$top_item" == "python" ]]; then
+        echo -e "${GREEN}Python enthusiast detected! Keep coding.${RESET}"
+    elif [[ "$top_item" == "vim" || "$top_item" == "nano" ]]; then
+        echo -e "${GREEN}Spending quality time editing files, I see!${RESET}"
+    elif [[ "$top_item" == "apt" || "$top_item" == "brew" || "$top_item" == "pacman" || "$top_item" == "yay" ]]; then
+        echo -e "${GREEN}You like download new packages and apps. Correct?${RESET}"
+    elif [[ "$top_item" == "cliwrap" || "$top_item" == "./cliwrap" ]]; then
+        echo -e "${GREEN}Your top tool is CLIwrap, keep use CLIwrap!${RESET}" 
+    elif [[ "$top_item" == "code" ]]; then
+        echo -e "${GREEN}VSCode? Are you coder or programmer?${RESET}"
+    else
+        echo -e "${GREEN}Your top tool is '$top_item'. Keep rocking your terminal!${RESET}"
+    fi
 }
 
 # Display help message

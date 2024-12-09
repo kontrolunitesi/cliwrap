@@ -1,71 +1,86 @@
 # CLIwrap
-🎉 The *"Spotify Wrapped"* feature for **your** terminal!
+🚀 Bringing the *Spotify's Wrapped* feature for **your** terminal, with the support of history files!
 
-### How?
-CLIwrap reads your shell's history file to serve you a recap of what commands you ran in your terminal!
+[Webpage](https://cli.musti.codes) | [Report Issues](https://github.com/islemci/cliwrap/issues/new/choose) | [License](LICENSE)
 
-### Supported Shells
-- bash
-- csh/tcsh
-- fish
-- zsh
+## 😮‍💨 Features
+- You can load in lots of different types of terminal history files!
+   - **bash** history file
+   - **csh**/**tcsh** history files
+   - **fish** history file
+   - **zsh** history file
 
-### Installation
-Installing **CLIwrap** is easy! You can pull this Git image, or create a new file and set everything up yourself. Because that it is a simple **bash** script, you don't need to run or build anything!
+- Adds in **motivational** messages for your results!
+- You can easily copy and paste your results!
 
-#### Install via Homebrew
-You can now easily install **CLIwrap** on your device with [Homebrew](https://brew.sh)
+## 💻 Installing
+
+### Installation with Homebrew
+You can easily install **CLIwrap** with **[Homebrew](https://brew.sh)** on Linux and MacOS devices! To start your installation:
+
+1. Make sure that Homebrew is installed.
+```bash
+$ brew -v
+> Homebrew 4.4.10
+```
+
+2. Setup the **CLIwrap** Homebrew Tap.
 ```bash
 $ brew tap islemci/cliwrap
+```
+
+3. Install the **CLIwrap** application.
+```
 $ brew install cliwrap
 ```
-
-> [!NOTE]
-> As the **CLIwrap** is not currently in the Homebrew main repo, you should not forget to add the tap of this app via `brew tap`.
-
-#### Install from AUR
-Arch Linux users can easily install **CLIwrap** from the [AUR](https://aur.archlinux.org)
-```bash
-$ yay -S cliwrap-git
+4. You can now use **CLIwrap** with a simple command!
 ```
-
-#### Run from file
-With commands below, download cliwrap to your current directory and mark it as executable.
-
-```bash
-$ curl -sSL -o cliwrap https://raw.githubusercontent.com/islemci/cliwrap/refs/heads/main/cliwrap
-$ chmod +x cliwrap
-```
-
-Now, try running it with by running the following command:
-
-```bash
-$ ./cliwrap
-```
-
-Congrats! Now the script should be working. You can run it with the `-h` flag for more information.
-
-#### Run from everywhere
-
-To run it everywhere with a simple command, you can use command below to download the script and move the script into your `/usr/local/bin` directory.
-
-
-```bash
-$ sudo curl -sSL -o /usr/local/bin/cliwrap https://raw.githubusercontent.com/islemci/cliwrap/refs/heads/main/cliwrap
-$ sudo chmod +x /usr/local/bin/cliwrap
-```
-
-Now, you can run:
-
-```bash
 $ cliwrap
 ```
 
-to get your wrapped everywhere!
+### Installation on Arch-based systems
+You can choose to install **CLIwrap** via **[AUR](https://aur.archlinux.org/packages/cliwrap-git)** for Arch Linux-based systems. 
 
-### Custom messages for specific commands/tools
+1. Install **CLIwrap** via `yay` package manager.
+```
+$ yay -S cliwrap-git
+```
+2. Now you can easily run **CLIwrap** with a simple command!
+ ```
+$ cliwrap
+```
 
-Motivating and positive messages about usage of tools like `ls`, `brew` etc. will be displayed if one of them is a top tool.
+**Important note:** Arch Linux and AUR support is maintained by [xeyossr](https://github.com/xeyossr).
 
-### License
-This project is licensed under the MIT License. You can check out the conditions [here.](LICENSE)
+### Installation on other systems
+
+As **CLIwrap** is a simple, single-file shell code, you can run it on *most* of the systems that you are running.
+
+1. Download the source file with **cURL**.
+```
+$ sudo curl -sSL -o /usr/local/bin/cliwrap https://raw.githubusercontent.com/islemci/cliwrap/refs/heads/main/cliwrap
+```
+2. Mark the source file as an executable.
+```
+$ sudo chmod +x /usr/local/bin/cliwrap
+```
+3. Now you can easily run **CLIwrap** with a simple command!
+ ```
+$ cliwrap
+```
+
+**CLIwrap** manual installation has been currently tested for:
+- MacOS
+- Linux-based distrubitions
+- FreeBSD
+
+## Contributors
+The most updated list can be found in the repository's [contributors](https://github.com/islemci/cliwrap/graphs/contributors) page.
+
+The **CLIwrap** project is currently maintained by [islemci](https://github.com/islemci).
+
+## License
+All rights to the **CLIwrap** project is protected under the [MIT License](LICENSE)'s terms. This includes all code related to **CLIwrap** and its development.
+
+All following contributions should and will be made under the MIT License too.
+

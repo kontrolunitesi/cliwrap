@@ -1,0 +1,37 @@
+name: Test on devices
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        shell: [bash, zsh]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Make script executable
+        run: chmod +x ./cliwrap
+
+      - name: Test CLIwrap on ${{ matrix.os }} with ${{ matrix.shell }}
+        shell: ${{ matrix.shell }}
+        run: |
+          ./cliwrap -h
+          ./cliwrap -zsh
+          ./cliwrap -bash
+          ./cliwrap -fish
+
+          echo -e "ls\ncd ..\ngit status" > test_history
+          export HOME=$(pwd)
+          cp test_history .zsh_history
+          cp test_history .bash_history
+          cp test_history .local/share/fish/fish_history
+
+          ./cliwrap

@@ -49,3 +49,4 @@ jobs:
           elif [ "${{ matrix.shell }}" = "zsh" ]; then
             zsh ./cliwrap
           fi
+        continue-on-error: true

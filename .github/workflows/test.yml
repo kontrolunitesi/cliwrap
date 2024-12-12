@@ -1,9 +1,10 @@
-name: Test on devices
+name: Test on VMs
 
 on:
   pull_request:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   test:
@@ -21,17 +22,30 @@ jobs:
         run: chmod +x ./cliwrap
 
       - name: Test CLIwrap on ${{ matrix.os }} with ${{ matrix.shell }}
-        shell: ${{ matrix.shell }}
         run: |
-          ./cliwrap -h
-          ./cliwrap -zsh
-          ./cliwrap -bash
-          ./cliwrap -fish
+          echo "Running on ${{ matrix.os }} with ${{ matrix.shell }}"
+          if [ "${{ matrix.shell }}" = "bash" ]; then
+            bash ./cliwrap -h
+            bash ./cliwrap -zsh
+            bash ./cliwrap -bash
+            bash ./cliwrap -fish
+          elif [ "${{ matrix.shell }}" = "zsh" ]; then
+            zsh ./cliwrap -h
+            zsh ./cliwrap -zsh
+            zsh ./cliwrap -bash
+            zsh ./cliwrap -fish
+          fi
 
+          # Simulate a history file for testing
           echo -e "ls\ncd ..\ngit status" > test_history
           export HOME=$(pwd)
           cp test_history .zsh_history
           cp test_history .bash_history
+          mkdir -p .local/share/fish
           cp test_history .local/share/fish/fish_history
 
-          ./cliwrap
+          if [ "${{ matrix.shell }}" = "bash" ]; then
+            bash ./cliwrap
+          elif [ "${{ matrix.shell }}" = "zsh" ]; then
+            zsh ./cliwrap
+          fi

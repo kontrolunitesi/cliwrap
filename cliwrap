@@ -47,6 +47,14 @@ check_and_return_history_file() {
       return 1
     fi
     ;;
+  "bash")
+    if [[ -f "$HOME/.bash_history" ]]; then
+      history_file="$HOME/.bash_history"
+    else
+      echo -e "${RED}The specified terminal history file was not found! Why don't you run \`cliwrap -h\` to find a compatible one?${RESET}" >&2
+      return 1
+    fi
+    ;;
   *)
     echo -e "${RED}Your shell is not added to the script. Considering creating an issue on the GitHub repository. ${RESET}" >&2
     return 1

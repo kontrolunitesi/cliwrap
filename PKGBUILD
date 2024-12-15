@@ -1,7 +1,7 @@
 # Maintainer: kamisaki
 
 pkgname=cliwrap-git
-pkgver=0.9.2.0.g8006f22
+pkgver=0.9.3.r1.g9783b2f
 pkgrel=1
 pkgdesc="The Spotify Wrapped for your terminal!"
 arch=('any')

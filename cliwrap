@@ -170,6 +170,14 @@ display_table() {
             echo -e "${YELLOW}VSCode? Do you really program that much?${RESET}"
         elif [[ "$top_item" == "neofetch" ]]; then
             echo -e "${YELLOW}Are you like neofetch? I think, you'll like CLIwrap too!${RESET}"
+		elif [[ "$top_item" == "fastfetch" ]]; then
+			echo -e "${YELLOW}Do you like fastfetch? I think, you'll like CLIwrap too!${RESET}"
+		elif [[ "$top_item" == "nvim" ]]; then
+			echo -e "${YELLOW}You’re not just editing files: you’re crafting masterpieces, one keybind at a time!${RESET}"
+		elif [[ "$top_item" == "make" ]]; then
+			echo -e "${YELLOW}You do a lot of compiling, right? Honestly, I'm a fan of yours.${RESET}"
+		elif [[ "$top_item" == "cat" ]]; then
+			echo -e "${YELLOW}Don't tell me you even read books from the terminal! Or is it just cat love? :D${RESET}"
         else
       echo -e "${YELLOW}Your top tool is '$top_item'. Keep rocking your terminal!${RESET}"
     fi
